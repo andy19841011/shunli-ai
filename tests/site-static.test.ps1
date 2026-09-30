@@ -25,15 +25,19 @@ if ($config -notmatch 'WORKS:\s*(?:Object\.freeze\()?\[') {
   throw 'WORKS must be defined in the centralized configuration.'
 }
 
-$placeholderCount = [regex]::Matches($config, 'placeholder:\s*true').Count
-if ($placeholderCount -ne 6) {
-  throw 'WORKS must provide six case placeholders.'
+$publishedWorkCount = [regex]::Matches($config, 'placeholder:\s*false').Count
+if ($publishedWorkCount -ne 6) {
+  throw 'WORKS must provide six published YouTube cases.'
 }
 
 foreach ($field in @('thumbnail', 'title', 'industry', 'need', 'solution', 'videoId', 'youtubeUrl', 'placeholder')) {
   if ($config -notmatch "(?m)^\s*${field}:") {
     throw "WORKS entries must include $field."
   }
+}
+
+foreach ($videoId in @('I3rpcy-ociQ', 'ecoE66EEans', 'YA2uF6QWCwc', 'ijOjpwMHtYk', 'K5b3x7yBO_w', 'HaFmMfV1ScM')) {
+  if ($config -notmatch "videoId:\s*'$videoId'") { throw "Missing confirmed YouTube case: $videoId" }
 }
 
 $textFiles = @(
