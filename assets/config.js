@@ -1,7 +1,7 @@
 window.SHUNLI_AI_CONFIG = Object.freeze({
   SITE_URL: 'https://andy19841011.github.io/shunli-ai/',
   BRAND_NAME: '順利 AI 製作',
-  LINE_URL: '',
+  LINE_URL: 'https://lin.ee/Ujvw1gm',
   GOOGLE_FORM_URL: '',
   CONTACT: Object.freeze({
     email: '',

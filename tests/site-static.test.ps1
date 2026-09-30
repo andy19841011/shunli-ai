@@ -13,6 +13,10 @@ if ($config -notmatch "SITE_URL:\s*'https://andy19841011\.github\.io/shunli-ai/'
   throw 'SITE_URL must target the independent shunli-ai GitHub Pages project site.'
 }
 
+if ($config -notmatch "LINE_URL:\s*'https://lin\.ee/Ujvw1gm'") {
+  throw 'LINE_URL must use the confirmed official LINE contact link.'
+}
+
 if ($config -notmatch 'WORKS:\s*(?:Object\.freeze\()?\[') {
   throw 'WORKS must be defined in the centralized configuration.'
 }
