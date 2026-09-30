@@ -17,6 +17,10 @@ if ($config -notmatch "LINE_URL:\s*'https://lin\.ee/Ujvw1gm'") {
   throw 'LINE_URL must use the confirmed official LINE contact link.'
 }
 
+if ($config -notmatch "CONSULT_URL:\s*'https://lin\.ee/72VveZO'") {
+  throw 'CONSULT_URL must use the confirmed consultation LINE link.'
+}
+
 if ($config -notmatch 'WORKS:\s*(?:Object\.freeze\()?\[') {
   throw 'WORKS must be defined in the centralized configuration.'
 }
@@ -71,7 +75,7 @@ if (-not (Test-Path $appPath)) { throw 'assets/app.js is required.' }
 if (-not (Test-Path $stylePath)) { throw 'assets/styles.css is required.' }
 $app = Get-Content -Raw $appPath
 $style = Get-Content -Raw $stylePath
-foreach ($required in @('createElement', 'loading', 'lazy', 'placeholder', 'ShunliAIApp', 'removeAttribute')) {
+foreach ($required in @('createElement', 'loading', 'lazy', 'placeholder', 'ShunliAIApp', 'removeAttribute', 'CONSULT_URL')) {
   if ($app -notlike "*$required*") { throw "app.js is missing delayed-video behavior: $required" }
 }
 if ($app -notlike '*document.getElementById(modal.dataset.trigger)?.focus()*') { throw 'Modal close must restore focus to its triggering control.' }

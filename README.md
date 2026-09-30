@@ -6,7 +6,8 @@
 
 所有可替換設定都在 `assets/config.js`：
 
-- `LINE_URL`：填入正式 LINE 連結。
+- `LINE_URL`：填入「加入 LINE」的正式連結。
+- `CONSULT_URL`：填入「立即諮詢」的正式連結。
 - `GOOGLE_FORM_URL`：填入正式詢價表單連結。
 - `CONTACT` 與 `SOCIAL_LINKS`：填入已確認的聯絡與社群資料；請勿放入假資料。
 - `WORKS`：新增或更新六格案例。每筆都要有 `thumbnail`、`title`、`industry`、`need`、`solution`、`videoId`、`youtubeUrl`、`placeholder`。正式 YouTube 案例設為 `placeholder: false`，並填入影片 ID 和完整 YouTube URL；未有正式作品時維持 `placeholder: true` 與空白影片欄位。

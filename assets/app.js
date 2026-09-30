@@ -74,7 +74,7 @@
   menu?.addEventListener('click', () => { const open = nav.classList.toggle('is-open'); menu.setAttribute('aria-expanded', String(open)); });
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('is-open'); menu?.setAttribute('aria-expanded', 'false'); }));
   document.querySelectorAll('[data-contact-action]').forEach(link => link.addEventListener('click', event => {
-    const url = link.dataset.contactAction === 'line' ? config.LINE_URL : config.GOOGLE_FORM_URL;
+    const url = link.dataset.contactAction === 'line' ? config.LINE_URL : (config.CONSULT_URL || config.GOOGLE_FORM_URL);
     if (!url) { event.preventDefault(); status.textContent = '聯絡方式準備中，請稍後再試。'; return; }
     link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer';
   }));
