@@ -62,7 +62,14 @@
       const heading = document.createElement('h3'); setText(heading, work.title);
       const need = document.createElement('p'); setText(need, `需求｜${work.need}`);
       const solution = document.createElement('p'); setText(solution, `AI 解法｜${work.solution}`);
-      body.append(industry, heading, need, solution);
+      const description = document.createElement('p'); description.className = 'case-description'; setText(description, work.description);
+      const meta = document.createElement('dl'); meta.className = 'case-meta';
+      const servicesTerm = document.createElement('dt'); servicesTerm.textContent = '服務';
+      const servicesValue = document.createElement('dd'); setText(servicesValue, (work.services || []).join('・'));
+      const platformsTerm = document.createElement('dt'); platformsTerm.textContent = '適用平台';
+      const platformsValue = document.createElement('dd'); setText(platformsValue, (work.platforms || []).join('・'));
+      meta.append(servicesTerm, servicesValue, platformsTerm, platformsValue);
+      body.append(industry, heading, need, solution, description, meta);
       if (validWork(work)) { const play = document.createElement('button'); play.type = 'button'; play.id = `work-play-${index + 1}`; play.className = 'text-button'; play.textContent = '查看影片'; play.addEventListener('click', () => openWorkModal(work, play)); body.append(play); }
       else { const note = document.createElement('span'); note.className = 'placeholder-note'; note.textContent = '案例素材準備中'; body.append(note); }
       card.append(media, body); worksGrid.append(card);

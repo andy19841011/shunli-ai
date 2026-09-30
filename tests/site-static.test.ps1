@@ -30,7 +30,7 @@ if ($publishedWorkCount -ne 6) {
   throw 'WORKS must provide six published YouTube cases.'
 }
 
-foreach ($field in @('thumbnail', 'title', 'industry', 'need', 'solution', 'videoId', 'youtubeUrl', 'placeholder')) {
+foreach ($field in @('thumbnail', 'title', 'industry', 'need', 'solution', 'description', 'services', 'platforms', 'videoId', 'youtubeUrl', 'placeholder')) {
   if ($config -notmatch "(?m)^\s*${field}:") {
     throw "WORKS entries must include $field."
   }
@@ -39,6 +39,10 @@ foreach ($field in @('thumbnail', 'title', 'industry', 'need', 'solution', 'vide
 foreach ($videoId in @('I3rpcy-ociQ', 'ecoE66EEans', 'YA2uF6QWCwc', 'ijOjpwMHtYk', 'K5b3x7yBO_w', 'HaFmMfV1ScM')) {
   if ($config -notmatch "videoId:\s*'$videoId'") { throw "Missing confirmed YouTube case: $videoId" }
 }
+
+if ([regex]::Matches($config, 'description:\s*').Count -ne 6) { throw 'Each published case needs one SEO description.' }
+if ([regex]::Matches($config, 'services:\s*\[').Count -ne 6) { throw 'Each published case needs service labels.' }
+if ([regex]::Matches($config, 'platforms:\s*\[').Count -ne 6) { throw 'Each published case needs platform labels.' }
 
 $textFiles = @(
   Get-ChildItem -Path (Join-Path $root 'assets') -Recurse -File -Include *.html,*.css,*.js,*.xml,*.txt,*.md
@@ -81,6 +85,9 @@ $app = Get-Content -Raw $appPath
 $style = Get-Content -Raw $stylePath
 foreach ($required in @('createElement', 'loading', 'lazy', 'placeholder', 'ShunliAIApp', 'removeAttribute', 'CONSULT_URL')) {
   if ($app -notlike "*$required*") { throw "app.js is missing delayed-video behavior: $required" }
+}
+foreach ($required in @('work.description', 'work.services', 'work.platforms')) {
+  if ($app -notlike "*$required*") { throw "app.js must render case SEO semantics: $required" }
 }
 if ($app -notlike '*document.getElementById(modal.dataset.trigger)?.focus()*') { throw 'Modal close must restore focus to its triggering control.' }
 foreach ($width in @('1440px', '1024px', '768px', '430px', '390px', '375px')) {
